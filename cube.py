@@ -65,19 +65,19 @@ class Cube(pygame.sprite.Sprite):
 			if cube[0] < 0 or cube[1] < 0 or cube[0] >= 16 or cube[1] >= 24:
 				return True
 			# 不为None，说明之前已经有小方块存在了，也不合法
-			if self.matrix[cube[0]][cube[1]]:
+			if matrix[cube[1]][cube[0]]:
 				 return True
 		return False	
 
 	def draw_in_left(self, screen):
 		for cube in self.get_pos1():
 			pygame.draw.rect(screen, self.color, (cube[0] * 25, cube[1] * 25, 25, 25))
-			pygame.draw.rect(screen, (230, 230, 230), (cube[0] * 25, cube[1] * 25, 25, 25), 2)
+			pygame.draw.rect(screen, (200, 200, 200), (cube[0] * 25, cube[1] * 25, 25, 25), 2)
 
 	def draw_in_right(self, screen):
 		for cube in self.get_pos2():
 			pygame.draw.rect(screen, self.color, (cube[0] * 25, cube[1] * 25, 25, 25))
-			pygame.draw.rect(screen, (230, 230, 230), (cube[0] * 25, cube[1] * 25, 25, 25), 2)
+			pygame.draw.rect(screen, (200, 200, 200), (cube[0] * 25, cube[1] * 25, 25, 25), 2)
 
 	def moveLeft(self, matrix):
 		center = (self.center[0] - 1, self.center[1])
@@ -93,6 +93,9 @@ class Cube(pygame.sprite.Sprite):
 		center = (self.center[0], self.center[1] + 1)
 		if not self.conflict(center, matrix):
 			self.center = center
+			return True
+		else:
+			return False
 
 	def rotate(self, matrix):
 		new_form = (self.form + 1) % len(self.cube_form[self.shape])
@@ -100,4 +103,3 @@ class Cube(pygame.sprite.Sprite):
 		self.form = new_form
 		if self.conflict(self.center, matrix):
 			self.form = old_form
-
