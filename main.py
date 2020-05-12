@@ -56,7 +56,7 @@ def clear_full(matrix, score):
 	return new_matrix, score
 
 def main():
-	# pygame.mixer.music.play(-1)
+	pygame.mixer.music.play(-1)
 	clock = pygame.time.Clock()
 	# 使用矩阵记录方格是否为空
 	matrix = [[None] * G_w_num for i in range(G_h_num)]
